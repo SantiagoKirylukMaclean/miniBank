@@ -8,11 +8,11 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import miniBank.model.User;
 
-@Component
+@Repository
 public class UserRepository extends ConnectionDAO{
 	
 	
@@ -22,7 +22,7 @@ public class UserRepository extends ConnectionDAO{
 		PreparedStatement ps = null;
 		Connection conn = getCurrentConnection();
 		try {
-			//users = new ArrayList<users>();
+
 			ps = conn.prepareStatement("SELECT * FROM users");
 			rs = ps.executeQuery();
 			while (rs.next()) {

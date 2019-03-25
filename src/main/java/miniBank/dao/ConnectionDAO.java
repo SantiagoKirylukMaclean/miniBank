@@ -41,7 +41,7 @@ public class ConnectionDAO {
 		}
 	}
 
-	protected void close(Object obj) {
+	protected static void close(Object obj) {
 		if (obj != null) {
 			try {
 				if (obj instanceof PreparedStatement) {
