@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import miniBank.model.Balance;
+import miniBank.security.JWT;
 import miniBank.service.BalanceService;
 import sun.misc.BASE64Decoder;
 
@@ -20,7 +21,10 @@ public class BalanceController {
 
 	@RequestMapping("/balance/{identityId}")
 	public Balance findBalanceByUser(@PathVariable String identityId, @RequestHeader("authorization") String authString){
+		JWT jwt = new JWT();
 		System.out.println("authString: " + authString);
+		System.out.println("token: " + jwt.createJWT("30366514", "USER", 12312312));
+		jwt.parseJWT(jwt.createJWT("30366514", "USER", 12312312));
 		isUserAuthenticated(authString);
 		return service.getBalance(identityId);
 	}
