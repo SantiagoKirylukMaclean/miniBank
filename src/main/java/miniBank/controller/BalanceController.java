@@ -20,12 +20,12 @@ public class BalanceController {
 	private BalanceService service;
 
 	@RequestMapping("/balance/{identityId}")
-	public Balance findBalanceByUser(@PathVariable String identityId, @RequestHeader("authorization") String authString){
+	public Balance findBalanceByUser(@PathVariable String identityId){
 		JWT jwt = new JWT();
-		System.out.println("authString: " + authString);
+		//System.out.println("authString: " + authString);
 		System.out.println("token: " + jwt.createJWT("30366514", "USER", 12312312));
 		jwt.parseJWT(jwt.createJWT("30366514", "USER", 12312312));
-		isUserAuthenticated(authString);
+		//isUserAuthenticated(authString);
 		return service.getBalance(identityId);
 	}
 	

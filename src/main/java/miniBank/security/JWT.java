@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import io.jsonwebtoken.Claims;
@@ -40,13 +41,20 @@ public class JWT {
 	    */
 	    
 	    JSONObject root = new JSONObject();
-	    root.put("identity", identity);
-	    root.put("role", role);
-	    if (ttlMillis >= 0) {
-	    long expMillis = nowMillis + ttlMillis;
-	        //Date exp = new Date(expMillis);
-	        root.put("expiration",expMillis);
-	    }
+	    try {
+			root.put("identity", identity);
+			root.put("role", role);
+		    if (ttlMillis >= 0) {
+			    long expMillis = nowMillis + ttlMillis;
+			        //Date exp = new Date(expMillis);
+			        root.put("expiration",expMillis);
+			    }
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    
+
 
 	    /*
 	    String jwt = Jwts.builder()

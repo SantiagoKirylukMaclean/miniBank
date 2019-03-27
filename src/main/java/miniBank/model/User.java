@@ -1,97 +1,89 @@
 package miniBank.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
+
+
+
+
 public class User {
 	
-	private long id;
-	private String userId;
-	private String password;
-	private String identityId;
-	private String name;
-	private String lastName;
-	
+    private Long id;
+    private String name;
+    private String username;
+    private String email;
+    private String password;
+    private Set<Role> roles = new HashSet<>();
+    
 	public User() {
 		super();
 		this.id = id;
-		this.userId = userId;
-		this.password = password;
-		this.identityId = identityId;
 		this.name = name;
-		this.lastName = lastName;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.roles = roles;
 	}
 	
-	
-	public User(long id, String userId, String password, String identityId, String name, String lastName) {
+    public User(Long id, String name, String username, String email, String password, Set<Role> roles) {
 		super();
 		this.id = id;
-		this.userId = userId;
-		this.password = password;
-		this.identityId = identityId;
 		this.name = name;
-		this.lastName = lastName;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.roles = roles;
 	}
 
-
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
-
-
-	public String getUserId() {
-		return userId;
-	}
-
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
-
-	public String getPassword() {
-		return password;
-	}
-
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-
-	public String getIdentityId() {
-		return identityId;
-	}
-
-
-	public void setIdentityId(String identityId) {
-		this.identityId = identityId;
-	}
-
 
 	public String getName() {
 		return name;
 	}
 
-
 	public void setName(String name) {
 		this.name = name;
 	}
 
-
-	public String getLastName() {
-		return lastName;
+	public String getUsername() {
+		return username;
 	}
 
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
 	}
 	
-	
-	
-	
+    
 	
 }
