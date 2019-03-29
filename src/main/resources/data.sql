@@ -19,9 +19,9 @@ id LONG PRIMARY KEY AUTO_INCREMENT  NOT NULL,
 name VARCHAR(50) NOT NULL
 );
 
-INSERT INTO roles (name) VALUES ('ROLE_USER');
-INSERT INTO roles (name) VALUES ('ROLE_ADMIN');
-INSERT INTO roles (name) VALUES ('ROLE_PM');
+INSERT INTO roles(name) VALUES('ROLE_USER');
+INSERT INTO roles(name) VALUES('ROLE_PM');
+INSERT INTO roles(name) VALUES('ROLE_ADMIN');
 
 DROP TABLE IF EXISTS user_roles;
 
@@ -48,12 +48,3 @@ currency VARCHAR(3) NOT NULL
 INSERT INTO balance (identityId,amount,currency) VALUES ('30366514',2453.43,'ARS');
 INSERT INTO balance (identityId,amount,currency) VALUES ('12121212',1234.43,'ARS');
 INSERT INTO balance (identityId,amount,currency) VALUES ('21212121',4323.43,'ARS');
-
-DROP TABLE IF EXISTS transactions;
-
-CREATE TABLE transactions (
-id LONG PRIMARY KEY AUTO_INCREMENT  NOT NULL,
-identityId LONG VARCHAR(50) NOT NULL,
-amount DECIMAL(10,2) NOT NULL,
-created DATETIME NOT NULL
-);
