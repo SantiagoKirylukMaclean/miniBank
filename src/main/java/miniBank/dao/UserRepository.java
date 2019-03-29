@@ -35,11 +35,13 @@ public class UserRepository extends ConnectionDAO{
 				Set<Role> roles = new HashSet<>();
 				User user = new User();
 				user.setId(rs.getLong("id"));
-				roles.add(roleRepository.findAll().stream().filter(r -> r.getId().equals(user.getId())).findAny().get());
+				//roles.add(roleRepository.findAll().stream().filter(r -> r.getId().equals(user.getId())).findAny().get());
 				user.setName(rs.getString("name"));
 				user.setUsername(rs.getString("username"));
 				user.setEmail(rs.getString("email"));
 				user.setPassword(rs.getString("password"));
+				roles.add(new Role());
+				
 				user.setRoles(roles);
 				users.add(user);
 			}
