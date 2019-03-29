@@ -2,15 +2,15 @@ package miniBank.security;
 
 import java.util.Date;
 
+import javax.xml.bind.DatatypeConverter;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
-
-
-
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
@@ -61,9 +61,23 @@ public class JwtProvider {
     }
     
     public String getUserNameFromJwtToken(String token) {
-        return Jwts.parser()
+    	return Jwts.parser()
 			                .setSigningKey(jwtSecret)
 			                .parseClaimsJws(token)
 			                .getBody().getSubject();
+    }
+
+    public Date getIssuedAtFromJwtToken(String token) {
+    	return Jwts.parser()
+			                .setSigningKey(jwtSecret)
+			                .parseClaimsJws(token)
+			                .getBody().getIssuedAt();
+    }
+    
+    public Date getExpirationFromJwtToken(String token) {
+    	return Jwts.parser()
+			                .setSigningKey(jwtSecret)
+			                .parseClaimsJws(token)
+			                .getBody().getExpiration();
     }
 }

@@ -23,17 +23,17 @@ INSERT INTO roles (name) VALUES ('ROLE_USER');
 INSERT INTO roles (name) VALUES ('ROLE_ADMIN');
 INSERT INTO roles (name) VALUES ('ROLE_PM');
 
-DROP TABLE IF EXISTS roles;
+DROP TABLE IF EXISTS user_roles;
 
-CREATE TABLE roles (
+CREATE TABLE user_roles (
 user_id LONG  NOT NULL,
 role_id LONG NOT NULL
 );
 
-INSERT INTO roles (user_id, role_id) VALUES (1,1);
-INSERT INTO roles (user_id, role_id) VALUES (2,1);
-INSERT INTO roles (user_id, role_id) VALUES (2,3);
-INSERT INTO roles (user_id, role_id) VALUES (3,2);
+INSERT INTO user_roles (user_id, role_id) VALUES (1,1);
+INSERT INTO user_roles (user_id, role_id) VALUES (2,1);
+INSERT INTO user_roles (user_id, role_id) VALUES (2,3);
+INSERT INTO user_roles (user_id, role_id) VALUES (3,2);
 
 
 DROP TABLE IF EXISTS balance;

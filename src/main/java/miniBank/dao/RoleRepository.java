@@ -15,14 +15,14 @@ import miniBank.model.User;
 @Repository
 public class  RoleRepository extends ConnectionDAO{
     
-	public List<Role> findByName(String roleName){
+	public List<Role> findAll(){
 		List<Role> roles = new ArrayList<Role>();
 		ResultSet rs = null;
 		PreparedStatement ps = null;
 		Connection conn = getCurrentConnection();
 		try {
 
-			ps = conn.prepareStatement("SELECT * FROM roles");
+			ps = conn.prepareStatement("select u.user_id as id, r.name as name from roles r, user_roles u where r.id = u.role_id");
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				Role role = new Role();

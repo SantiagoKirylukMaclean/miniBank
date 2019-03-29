@@ -1,7 +1,5 @@
 package miniBank.controller;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +19,7 @@ import miniBank.dao.RoleRepository;
 import miniBank.dao.UserRepository;
 import miniBank.message.JwtResponse;
 import miniBank.message.LoginForm;
-import miniBank.model.User;
 import miniBank.security.JwtProvider;
-import miniBank.service.UserService;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -61,6 +57,9 @@ public class AuthController {
 	        SecurityContextHolder.getContext().setAuthentication(authentication);
 
 	        String jwt = jwtProvider.generateJwtToken(authentication);
+	        System.out.println("token Decripted: " + jwtProvider.getUserNameFromJwtToken(jwt));
+	        System.out.println("token Decripted: " + jwtProvider.getIssuedAtFromJwtToken(jwt));
+	        System.out.println("token Decripted: " + jwtProvider.getExpirationFromJwtToken(jwt));
 	        return ResponseEntity.ok(new JwtResponse(jwt));
 	    }
 
