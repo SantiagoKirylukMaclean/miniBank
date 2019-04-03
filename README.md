@@ -2,6 +2,9 @@
 
 # users
 
+```
+URL: /users
+METHOD: GET
 [
     {
         "id": 1,
@@ -38,3 +41,4 @@
         ]
     }
 ]
+```
