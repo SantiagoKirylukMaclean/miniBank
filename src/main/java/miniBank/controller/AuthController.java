@@ -56,9 +56,7 @@ public class AuthController {
 	    
 	    @PostMapping("/signin")
 	    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
-
-	    	System.out.println("password: " + loginRequest.getPassword());
-	    	System.out.println("encode: " + encoder.encode(loginRequest.getPassword()));
+	    	System.out.print(encoder.encode(loginRequest.getPassword()));
 	        Authentication authentication = authenticationManager.authenticate(
 	                new UsernamePasswordAuthenticationToken(
 	                        loginRequest.getUsername(),
@@ -69,9 +67,6 @@ public class AuthController {
 	        SecurityContextHolder.getContext().setAuthentication(authentication);
 
 	        String jwt = jwtProvider.generateJwtToken(authentication);
-	        System.out.println("token Decripted: " + jwtProvider.getUserNameFromJwtToken(jwt));
-	        System.out.println("token Decripted: " + jwtProvider.getIssuedAtFromJwtToken(jwt));
-	        System.out.println("token Decripted: " + jwtProvider.getExpirationFromJwtToken(jwt));
 	        return ResponseEntity.ok(new JwtResponse(jwt));
 	    }
 	    

@@ -14,17 +14,15 @@ public class BalanceService {
 	@Autowired
 	private BalanceRepository repository;
 	
-	public List<Balance> getAllBalance(){
-		List<Balance> balances = repository.findAllBalance();
-		return balances;
-	}
 	
-	public Balance getBalance(String identityId){
-		return repository.findAllBalance().stream().filter(b -> b.getIdentityId().equals(identityId)).findFirst().get();
-	}
-	
-	public Balance putBalance(Balance balance) {
-		return repository.modifyBalance(balance);
+
+	public Balance getBalance(String userName){
+		return repository.findAll().stream().filter(b -> b.getUsername().equals(userName)).findFirst().get();
 	}
 
+	public List<Balance> getBalances() {
+		return repository.findAll();
+	}
+	
+	
 }

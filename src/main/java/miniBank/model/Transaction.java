@@ -5,13 +5,13 @@ import java.math.BigDecimal;
 public class Transaction {
 
 	private long id;
-	private String identityId;
+	private String userName;
 	private BigDecimal amount;
 	
 	public Transaction() {
 		super();
 		this.id = id;
-		this.identityId = identityId;
+		this.userName = userName;
 		this.amount = amount;
 	}
 
@@ -19,7 +19,7 @@ public class Transaction {
 	public Transaction(long id, String identityId, BigDecimal amount) {
 		super();
 		this.id = id;
-		this.identityId = identityId;
+		this.userName = identityId;
 		this.amount = amount;
 	}
 
@@ -35,12 +35,12 @@ public class Transaction {
 
 
 	public String getIdentityId() {
-		return identityId;
+		return userName;
 	}
 
 
 	public void setIdentityId(String identityId) {
-		this.identityId = identityId;
+		this.userName = identityId;
 	}
 
 

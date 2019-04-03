@@ -1,30 +1,56 @@
 package miniBank.model;
 
 import java.math.BigDecimal;
-import java.util.Currency;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+@Entity
+@Table(name = "balance", uniqueConstraints = {
+        		@UniqueConstraint(columnNames = {
+                "username"
+            })
+})
 public class Balance {
 	
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	private String identityId;
+	
+	@NotBlank
+	@Size(min=3, max = 50)
+	private String username;
+	
+	
+	@Digits(integer=5, fraction=2)
 	private BigDecimal amount;
+
+	@NotBlank
+	@Size(min=3, max = 50)
 	private String currency;
 	
-	public Balance() {
-		super();
-		this.id = id;
-		this.identityId = identityId;
-		this.amount = amount;
-		this.currency = currency;
-	}
+	public Balance() {}
+
 	
-	public Balance(long id, String identityId, BigDecimal amount, String currency) {
+
+	public Balance(long id, @NotBlank @Size(min = 3, max = 50) String username,
+			@NotBlank @Digits(integer = 5, fraction = 2) BigDecimal amount,
+			@NotBlank @Size(min = 3, max = 50) String currency) {
 		super();
 		this.id = id;
-		this.identityId = identityId;
+		this.username = username;
 		this.amount = amount;
 		this.currency = currency;
 	}
+
+
 
 	public long getId() {
 		return id;
@@ -34,12 +60,12 @@ public class Balance {
 		this.id = id;
 	}
 
-	public String getIdentityId() {
-		return identityId;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setIdentityId(String identityId) {
-		this.identityId = identityId;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public BigDecimal getAmount() {
@@ -54,9 +80,10 @@ public class Balance {
 		return currency;
 	}
 
-	public void setCurrency(String string) {
-		this.currency = string;
+	public void setCurrency(String currency) {
+		this.currency = currency;
 	}
-
+	
+	
 	
 }
