@@ -133,3 +133,16 @@ Response:
     }
 ]
 ```
+
+## Run Test
+
+```
+mvn clean install
+```
+
+## Compile and run
+
+```
+CD into folder app
+mvn spring-boot:run
+```
