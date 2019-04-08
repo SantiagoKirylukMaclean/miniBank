@@ -1,45 +1,48 @@
 package miniBank.Controller;
 
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
 
-import miniBank.MiniBankApiApp;
-import miniBank.dao.BalanceRepository;
+import miniBank.controller.BalanceController;
 import miniBank.model.Balance;
+import miniBank.security.JwtAuthTokenFilter;
+import miniBank.security.JwtProvider;
+import miniBank.service.BalanceService;
 
  
 
-@AutoConfigureMockMvc
-@ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = MiniBankApiApp.class)
-@RunWith(SpringRunner.class)
+@RunWith(MockitoJUnitRunner.class)
 public class TestBalanceController {
-	
-	@Autowired
-    private MockMvc mockMvc;
+
+	@InjectMocks
+	BalanceController balanceController;
 	
 	@Mock
-	BalanceRepository balanceRepository;
+	BalanceService balanceService;
+	
+	@Mock
+	JwtProvider jwtProvider;
+	
+	@Mock
+	JwtAuthTokenFilter jwtAuthTokenFilter;
+	
+	@Mock
+	HttpServletRequest request;
 	
     @Before
     public void init() {
@@ -50,21 +53,25 @@ public class TestBalanceController {
     public void before() {
     	List<Balance> balances = new ArrayList<Balance>();
 		Balance balance1 = new Balance(1,"santiago",new BigDecimal(5000.43),"ARS");
-		Balance balance2 = new Balance(1,"joe",new BigDecimal(3000.43),"ARS");
+		Balance balance2 = new Balance(2,"joe",new BigDecimal(3000.43),"ARS");
 		balances.add(balance1);
 		balances.add(balance2);
 		
-		when(balanceRepository.findAll()).thenReturn(balances);
+		when(balanceService.getBalances()).thenReturn(balances);
+		when(balanceService.getBalance("santiago")).thenReturn(balance1);
 		
-		
+		when(jwtProvider.getUserNameFromJwtToken(jwtAuthTokenFilter.getJwt(request))).thenReturn("santiago");
     }
     
 	@Test
-	//@DisplayName("the return should be food, vip and location grouped by 500 Meters Slots and the glover must have a MOTORCYCLE and GLOVE BOX")
-	public void getAllBalanceTest() throws Exception {
-		this.mockMvc.perform(get("/balance"))
-		.andExpect(status().isOk());
-
+	public void getBalancesTest() {
+		List<Balance> balances = balanceController.findBalances();
+		assertEquals(2, balances.size());
 	}
 	
+	@Test
+	public void getBalanceTest() {
+		Balance balance = balanceController.findBalanceByUser(request);
+		assertEquals("santiago", balance.getUsername());
+	}
 }

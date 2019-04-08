@@ -12,16 +12,16 @@ import miniBank.model.Balance;
 public class BalanceService {
 	
 	@Autowired
-	private BalanceRepository repository;
+	private BalanceRepository balanceRepository;
 	
 	
 
 	public Balance getBalance(String userName){
-		return repository.findAll().stream().filter(b -> b.getUsername().equals(userName)).findFirst().get();
+		return balanceRepository.findAll().stream().filter(b -> b.getUsername().equals(userName)).findFirst().get();
 	}
 
 	public List<Balance> getBalances() {
-		return repository.findAll();
+		return balanceRepository.findAll();
 	}
 	
 	

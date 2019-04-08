@@ -21,7 +21,7 @@ import miniBank.service.TransactionService;
 public class TransactionController {
 	
 	@Autowired
-	private TransactionService transactionService;
+	TransactionService transactionService;
 	
     @Autowired
     JwtProvider jwtProvider;

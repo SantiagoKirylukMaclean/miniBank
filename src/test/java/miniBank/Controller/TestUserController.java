@@ -1,5 +1,4 @@
-package miniBank.Service;
-
+package miniBank.Controller;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
@@ -15,21 +14,18 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import miniBank.dao.UserRepository;
+import miniBank.controller.UserController;
 import miniBank.model.User;
 import miniBank.service.UserService;
- 
-
 
 @RunWith(MockitoJUnitRunner.class)
-public class TestUserService {
+public class TestUserController {
 	
 	@InjectMocks
-	UserService userService;
+	UserController userController;
 	
 	@Mock
-	UserRepository userRepository;
-	
+	UserService userService;
 	
     @Before
     public void init() {
@@ -44,14 +40,18 @@ public class TestUserService {
 		users.add(user1);
 		users.add(user2);
 		
-		when(userRepository.findAll()).thenReturn(users);
+		when(userService.getUsers()).thenReturn(users);
+		
+		
     }
     
-	@Test
-	public void getAllUserTest() {
-		List<User> users = userService.getUsers();
+    
+    
+    @Test
+	public void TestFindAllUsers() {
+    	List<User> users = userController.findAllUsers();
 		assertEquals(2, users.size());
-	}
-	
+    }
+    
 
 }

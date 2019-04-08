@@ -18,7 +18,7 @@ import miniBank.service.BalanceService;
 public class BalanceController {
 	
 	@Autowired
-	private BalanceService service;
+	private BalanceService balanceService;
 	
     @Autowired
     JwtProvider jwtProvider;
@@ -29,13 +29,13 @@ public class BalanceController {
 	@RequestMapping("/balance/")
 	@PreAuthorize("hasRole('USER')")
 	public Balance findBalanceByUser(HttpServletRequest req){
-		return service.getBalance(jwtProvider.getUserNameFromJwtToken(jwtAuthTokenFilter.getJwt(req)));
+		return balanceService.getBalance(jwtProvider.getUserNameFromJwtToken(jwtAuthTokenFilter.getJwt(req)));
 	}
 	
 	@RequestMapping("/balance/all")
 	@PreAuthorize("hasRole('ADMIN')")
 	public List<Balance> findBalances(){
-		return service.getBalances();
+		return balanceService.getBalances();
 	}
 
   

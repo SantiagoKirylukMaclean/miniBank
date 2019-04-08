@@ -2,14 +2,12 @@ package miniBank.Service;
 
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
- 
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -43,7 +41,7 @@ public class TestBalanceService {
     public void before() {
     	List<Balance> balances = new ArrayList<Balance>();
 		Balance balance1 = new Balance(1,"santiago",new BigDecimal(5000.43),"ARS");
-		Balance balance2 = new Balance(1,"joe",new BigDecimal(3000.43),"ARS");
+		Balance balance2 = new Balance(2,"joe",new BigDecimal(3000.43),"ARS");
 		balances.add(balance1);
 		balances.add(balance2);
 		
